@@ -1,249 +1,3 @@
-// // src/context/FormDataContext.jsx
-// import { createContext, useContext, useState, useEffect } from "react";
-// import axios from "axios";
-
-// const FormDataContext = createContext();
-
-// export const useFormData = () => useContext(FormDataContext);
-
-// export const FormDataProvider = ({ children }) => {
-//   const [formId, setFormId] = useState(null);
-//   const [formData, setFormData] = useState({
-//     personalInfo: {
-//       name: "",
-//       email: "",
-//       addressLine1: "",
-//       addressLine2: "",
-//       city: "",
-//       state: "",
-//       zipcode: "",
-//     },
-//     education: {
-//       isStudying: false,
-//       studyingAt: "",
-//     },
-//     projects: [],
-//   });
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-
-//   // Initialize or retrieve existing form data
-//   useEffect(() => {
-//     const savedFormId = localStorage.getItem("formId");
-
-//     if (savedFormId) {
-//       setFormId(savedFormId);
-//       fetchFormData(savedFormId);
-//     } else {
-//       createNewForm();
-//     }
-//   }, []);
-
-//   const createNewForm = async () => {
-//     try {
-//       setLoading(true);
-//       const response = await axios.post("/forms");
-//       const { _id } = response.data;
-
-//       setFormId(id);
-//       localStorage.setItem("formId", _id);
-//       setLoading(false);
-//     } catch (err) {
-//       setError("Failed to create a new form");
-//       setLoading(false);
-//       console.error("Error creating new form:", err);
-//     }
-//   };
-
-//   const fetchFormData = async (id) => {
-//     try {
-//       setLoading(true);
-//       const response = await axios.get(`/forms/${id}`);
-
-//       setFormData({
-//         personalInfo: response.data.personalInfo || formData.personalInfo,
-//         education: response.data.education || formData.education,
-//         projects: response.data.projects || formData.projects,
-//       });
-
-//       setLoading(false);
-//     } catch (err) {
-//       // If form not found, create a new one
-//       if ((err.response && err.response.status === 404) || 500) {
-//         createNewForm();
-//       } else {
-//         setError("Failed to fetch form data");
-//         setLoading(false);
-//         console.error("Error fetching form data:", err);
-//       }
-//     }
-//   };
-
-//   const updateFormSection = async (section, data) => {
-//     try {
-//       setLoading(true);
-
-//       // Update local state first
-//       setFormData((prev) => ({
-//         ...prev,
-//         [section]: data,
-//       }));
-
-//       // Then update on server
-//       await axios.patch(`/forms/${formId}`, {
-//         section,
-//         data,
-//       });
-
-//       setLoading(false);
-//     } catch (err) {
-//       setError(`Failed to update ${section}`);
-//       setLoading(false);
-//       console.error(`Error updating ${section}:`, err);
-//     }
-//   };
-
-//   const value = {
-//     formId,
-//     formData,
-//     loading,
-//     error,
-//     updateFormSection,
-//   };
-
-//   return (
-//     <FormDataContext.Provider value={value}>
-//       {children}
-//     </FormDataContext.Provider>
-//   );
-// };
-
-// export default FormDataContext;
-
-// import { createContext, useContext, useState, useEffect } from "react";
-// import axios from "axios";
-
-// const FormDataContext = createContext();
-
-// export const useFormData = () => useContext(FormDataContext);
-
-// export const FormDataProvider = ({ children }) => {
-//   const [formId, setFormId] = useState(null);
-//   const [formData, setFormData] = useState({
-//     personalInfo: {
-//       name: "",
-//       email: "",
-//       addressLine1: "",
-//       addressLine2: "",
-//       city: "",
-//       state: "",
-//       zipcode: "",
-//     },
-//     education: {
-//       isStudying: false,
-//       studyingAt: "",
-//     },
-//     projects: [],
-//   });
-//   const [loading, setLoading] = useState(false);
-//   const [error, setError] = useState(null);
-
-//   useEffect(() => {
-//     const savedFormId = localStorage.getItem("formId");
-
-//     if (savedFormId && savedFormId !== "undefined") {
-//       setFormId(savedFormId);
-//       fetchFormData(savedFormId);
-//     } else {
-//       createNewForm();
-//     }
-//   }, []);
-
-//   const createNewForm = async () => {
-//     try {
-//       setLoading(true);
-//       const response = await axios.post("/forms");
-//       const { _id } = response.data.id;
-
-//       setFormId(_id); // ✅ Corrected here
-//       localStorage.setItem("formId", _id);
-//       setLoading(false);
-//     } catch (err) {
-//       setError("Failed to create a new form");
-//       setLoading(false);
-//       console.error("Error creating new form:", err);
-//     }
-//   };
-
-//   const fetchFormData = async (id) => {
-//     try {
-//       setLoading(true);
-//       const response = await axios.get(`/forms/${id}`);
-
-//       setFormData({
-//         personalInfo: response.data.personalInfo || formData.personalInfo,
-//         education: response.data.education || formData.education,
-//         projects: response.data.projects || formData.projects,
-//       });
-
-//       setLoading(false);
-//     } catch (err) {
-//       if (err.response && err.response.status === 404) {
-//         createNewForm(); // Only retry on 404
-//       } else {
-//         setError("Failed to fetch form data");
-//         setLoading(false);
-//         console.error("Error fetching form data:", err);
-//       }
-//     }
-//   };
-
-//   const updateFormSection = async (section, data) => {
-//     if (!formId) {
-//       setError("Cannot update: formId is missing");
-//       return;
-//     }
-
-//     try {
-//       setLoading(true);
-
-//       // Update local state
-//       setFormData((prev) => ({
-//         ...prev,
-//         [section]: data,
-//       }));
-
-//       // Update server
-//       await axios.patch(`/forms/${formId}`, {
-//         section,
-//         data,
-//       });
-
-//       setLoading(false);
-//     } catch (err) {
-//       setError(`Failed to update ${section}`);
-//       setLoading(false);
-//       console.error(`Error updating ${section}:`, err);
-//     }
-//   };
-
-//   const value = {
-//     formId,
-//     formData,
-//     loading,
-//     error,
-//     updateFormSection,
-//   };
-
-//   return (
-//     <FormDataContext.Provider value={value}>
-//       {children}
-//     </FormDataContext.Provider>
-//   );
-// };
-
-// export default FormDataContext;
-
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 
@@ -253,6 +7,8 @@ export const useFormData = () => useContext(FormDataContext);
 
 export const FormDataProvider = ({ children }) => {
   const [formId, setFormId] = useState(null);
+  const backendUrl = import.meta.env.VITE_BACKEND_URL;
+
   const [formData, setFormData] = useState({
     personalInfo: {
       name: "",
@@ -287,7 +43,7 @@ export const FormDataProvider = ({ children }) => {
   const createNewForm = async () => {
     try {
       setLoading(true);
-      const response = await axios.post("/forms", formData); // send initial formData
+      const response = await axios.post(`${backendUrl}/forms`, formData); // send initial formData
       const { id, personalInfo, education, projects } = response.data;
       setFormId(id);
       localStorage.setItem("formId", id);
@@ -308,7 +64,7 @@ export const FormDataProvider = ({ children }) => {
   const fetchFormData = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`/forms/${id}`);
+      const response = await axios.get(`${backendUrl}/forms/${id}`);
       const { personalInfo, education, projects } = response.data;
       setFormData({
         personalInfo: personalInfo || formData.personalInfo,
@@ -342,7 +98,7 @@ export const FormDataProvider = ({ children }) => {
         [section]: data,
       }));
       // Update server
-      await axios.patch(`/forms/${formId}`, {
+      await axios.patch(`${backendUrl}/forms/${formId}`, {
         section,
         data,
       });
@@ -367,6 +123,7 @@ export const FormDataProvider = ({ children }) => {
     formData,
     loading,
     error,
+    setFormData,
     updateFormSection,
   };
 
