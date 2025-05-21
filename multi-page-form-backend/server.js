@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 });
 
 // ✅ Main API routes
-app.use("/api/", routes);
+app.use("/api", routes);
 
 // ✅ Export the app for Vercel
 module.exports = app;
