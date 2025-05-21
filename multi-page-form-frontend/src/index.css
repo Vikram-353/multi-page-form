@@ -1,0 +1,68 @@
+/* @import "tailwindcss";
+
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@layer components {
+  .form-input {
+    @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+
+  .error-message {
+    @apply text-red-500 text-sm mt-1;
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-md font-semibold text-white focus:outline-none focus:ring-2 focus:ring-opacity-50;
+  }
+
+  .btn-primary {
+    @apply btn bg-blue-600 hover:bg-blue-700 focus:ring-blue-500;
+  }
+
+  .btn-secondary {
+    @apply btn bg-gray-600 hover:bg-gray-700 focus:ring-gray-500;
+  }
+} */
+
+@import "tailwindcss";
+
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+@layer components {
+  .form-input {
+    @apply w-full p-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500;
+  }
+
+  .error-message {
+    @apply text-red-500 text-sm mt-1;
+  }
+
+  .btn-primary {
+    @apply px-4 py-2 rounded-md font-semibold text-white focus:outline-none focus:ring-2 focus:ring-blue-500/50 bg-blue-600 hover:bg-blue-700;
+  }
+
+  .btn-secondary {
+    @apply px-4 py-2 rounded-md font-semibold text-white focus:outline-none focus:ring-2 focus:ring-gray-500/50 bg-gray-600 hover:bg-gray-700;
+  }
+}

@@ -1,0 +1,38 @@
+// prisma/schema.prisma
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+model Form {
+  id          String      @id @default(auto()) @map("_id") @db.ObjectId
+  personalInfo PersonalInfo
+  education   Education
+  projects    Project[]
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+}
+
+type PersonalInfo {
+  name        String
+  email       String
+  addressLine1 String
+  addressLine2 String?
+  city        String
+  state       String
+  zipcode     String
+}
+
+type Education {
+  isStudying  Boolean
+  studyingAt  String?
+}
+
+type Project {
+  projectName        String
+  projectDescription String
+}
+type section
