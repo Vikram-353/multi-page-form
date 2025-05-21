@@ -11,7 +11,7 @@
     "prisma": "^6.8.2"
   },
   "scripts": {
-  "postinstall ": "prisma generate"
+  "build ": "prisma generate"
 }
 
 }
