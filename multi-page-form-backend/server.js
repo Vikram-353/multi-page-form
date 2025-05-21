@@ -11,6 +11,12 @@ const prisma = new PrismaClient();
 app.use(cors());
 app.use(express.json());
 
+// ✅ Add a root path route
+app.get("/", (req, res) => {
+  res.send("🚀 Backend is running! Welcome to the API.");
+});
+
+// ✅ Main API routes
 app.use("/api/", routes);
 
 // ✅ Export the app for Vercel
