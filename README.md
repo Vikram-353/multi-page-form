@@ -14,7 +14,8 @@ The goal of this project is to build a **multi-page form application** with a **
 
 ## 🧩 Tech Stack
 
-### Frontend
+### Frontend Setup
+
 - **React (with Vite)**
 - **React Router DOM** – Client-side routing
 - **React Hook Form** – Form state management
@@ -22,6 +23,7 @@ The goal of this project is to build a **multi-page form application** with a **
 - **UI Library (e.g., ShadCN/UI)** – Optional for styling
 
 ### Backend
+
 - **Node.js with Express**
 - **MongoDB** – Database
 - **Prisma ORM** – MongoDB data modeling and query handling
@@ -32,7 +34,9 @@ The goal of this project is to build a **multi-page form application** with a **
 ## 🌐 Application Structure
 
 ### 🔷 Page 1: Personal Information
+
 Fields:
+
 - Name  
 - Email  
 - Address Line 1  
@@ -42,11 +46,14 @@ Fields:
 - Zipcode  
 
 ### 🔷 Page 2: Educational Status
+
 - Are you still studying? (Yes/No)  
+-
   - If **Yes**: “Where are you studying?”  
   - If **No**: No additional input required  
 
 ### 🔷 Page 3: Projects
+
 - Add one or more projects dynamically:
   - Project Name  
   - Project Description  
@@ -66,10 +73,12 @@ Fields:
 ## 🛡️ Validation
 
 ### Client-Side
+
 - Form fields are validated before proceeding  
 - Instant feedback to users  
 
 ### Server-Side
+
 - Data is validated again before being saved in the database  
 - Ensures security and data integrity  
 
