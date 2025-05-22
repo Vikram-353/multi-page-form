@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from "react";
+import { configDotenv } from "dotenv";
 import axios from "axios";
 
 const FormDataContext = createContext();
@@ -43,7 +44,9 @@ export const FormDataProvider = ({ children }) => {
   const createNewForm = async () => {
     try {
       setLoading(true);
-      const response = await axios.post(`${backendUrl}/forms`, formData); // send initial formData
+      const response = await axios.post(`${backendUrl}/forms`, formData, {
+        withCredentials: true,
+      });
       const { id, personalInfo, education, projects } = response.data;
       setFormId(id);
       localStorage.setItem("formId", id);
@@ -64,7 +67,9 @@ export const FormDataProvider = ({ children }) => {
   const fetchFormData = async (id) => {
     try {
       setLoading(true);
-      const response = await axios.get(`${backendUrl}/forms/${id}`);
+      const response = await axios.get(`${backendUrl}/forms/${id}`, {
+        withCredentials: true,
+      });
       const { personalInfo, education, projects } = response.data;
       setFormData({
         personalInfo: personalInfo || formData.personalInfo,
@@ -98,10 +103,16 @@ export const FormDataProvider = ({ children }) => {
         [section]: data,
       }));
       // Update server
-      await axios.patch(`${backendUrl}/forms/${formId}`, {
-        section,
-        data,
-      });
+      await axios.patch(
+        `${backendUrl}/forms/${formId}`,
+        {
+          section,
+          data,
+        },
+        {
+          withCredentials: true,
+        }
+      );
       setLoading(false);
     } catch (err) {
       // Try to extract validation errors from backend
