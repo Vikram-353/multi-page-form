@@ -10,7 +10,14 @@ const prisma = new PrismaClient();
 
 const port = process.env.PORT || 5000;
 
-app.use(cors());
+app.use(
+  cors({
+    origin:
+      "https://multi-page-form-yf64-gzcneggx8-vilram-ranjans-projects.vercel.app",
+    methods: ["GET", "POST", "PATCH"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 // ✅ Add a root path route

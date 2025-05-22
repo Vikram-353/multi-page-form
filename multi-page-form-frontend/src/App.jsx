@@ -17,7 +17,7 @@ import axios from "axios";
 
 // Set base URL for API calls
 // axios.defaults.baseURL = "http://localhost:5000/api";
-axios.defaults.baseURL = import.meta.env.VITE_BACKENDURL;
+// axios.defaults.baseURL = import.meta.env.VITE_BACKEND_URL;
 
 function App() {
   return (

@@ -56,7 +56,7 @@ export const FormDataProvider = ({ children }) => {
     } catch (err) {
       setError("Failed to create a new form");
       setLoading(false);
-      console.error("Error creating new form:", err);
+      console.error("Error creating new form:", err.message);
     }
   };
 
