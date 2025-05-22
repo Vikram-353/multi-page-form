@@ -8,7 +8,7 @@ const routes = require("./routes/routes");
 const app = express();
 const prisma = new PrismaClient();
 
-const port = process.env.PORT || 5000;
+const port = process.env.PORT || 3000;
 
 app.use(
   cors({
