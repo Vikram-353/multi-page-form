@@ -21,4 +21,4 @@ app.get("/", (req, res) => {
 // ✅ Main API routes
 app.use("/api", routes);
 
-app.listen(port, () => console.log("Server Started", port));
+module.exports = app;
