@@ -8,6 +8,8 @@ const routes = require("./routes/routes");
 const app = express();
 const prisma = new PrismaClient();
 
+const port = process.env.PORT || 5000;
+
 app.use(cors());
 app.use(express.json());
 
@@ -19,5 +21,4 @@ app.get("/", (req, res) => {
 // ✅ Main API routes
 app.use("/api", routes);
 
-// ✅ Export the app for Vercel
-module.exports = app;
+app.listen(port, () => console.log("Server Started", port));
