@@ -13,18 +13,15 @@ const port = process.env.PORT || 3000;
 app.use(
   cors({
     origin: true,
-    credentials: true,
   })
 );
 
 app.use(express.json());
 
-// ✅ Add a root path route
 app.get("/", (req, res) => {
   res.send("🚀 Backend is running! Welcome to the API.");
 });
 
-// ✅ Main API routes
 app.use("/api", routes);
 
 app.listen(port, () => console.log("Server Started", port));

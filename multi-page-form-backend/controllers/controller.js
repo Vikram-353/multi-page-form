@@ -124,9 +124,8 @@ const updateData = async (req, res) => {
         .status(404)
         .json({ error: "Form not found with the provided ID" });
     }
-
-    res.status(500).json({ error: "Failed to update form" });
   }
+  res.status(500).json({ error: "Failed to update form" });
 };
 
 // Validation functions
